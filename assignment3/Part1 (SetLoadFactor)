@@ -1,0 +1,10 @@
+protected:
+	typedef DLList<T> List;
+	...
+	float loadFactor;
+	...
+	
+template<class T>
+void ChainedHashTable<T>::SetLoadFactor(float f) {
+	loadFactor = f;
+}
