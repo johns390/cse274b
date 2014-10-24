@@ -1,0 +1,88 @@
+int hash(T x) {
+	return (unsigned) x*3 % (1 << d);
+}
+	int hash2(T x) {
+	return 1 + hash(x) % ((1 << d) - 1);
+}
+	
+template<class T>
+void LinearHashTable<T>::resize() {
+	d = 1;
+	while ((1<<d) < 3*n) d++;
+	array<T> tnew(1<<d, null);
+	q = n;
+	// insert everything into tnew
+	for (int k = 0; k < t.length; k++) {
+		if (t[k] != null && t[k] != del) {
+			int i = 0;
+			int probe = hash(t[k]);
+			while (tnew[probe] != null) {
+				i = (i == tnew.length-1) ? 0 : i + 1; // increment i
+				probe = abs(hash(t[k]) + i*hash2(t[k])) % (1 << d);
+			}
+			tnew[probe] = t[k];
+		}
+	}
+	t = tnew;
+}
+
+template<class T>
+bool LinearHashTable<T>::add(T x) {
+	if (find(x) != null) return false;
+	if (2*(q+1) > t.length) resize();   // max 50% occupancy
+	int i = 0;
+	int probe = hash(x);
+	while (t[probe] != null && t[probe] != del) {
+		i = (i == t.length-1) ? 0 : i + 1; // increment i
+		probe = abs(hash(x) + i*hash2(x)) % (1 << d);
+	}
+	if (t[probe] == null) q++;
+	n++;
+	t[probe] = x;
+	return true;
+}
+
+template<class T>
+T LinearHashTable<T>::find(T x) {
+	int i = 0;
+	int probe = hash(x);
+	while (t[probe] != null) {
+		if (t[probe] != del && t[probe] == x) return t[probe];
+		i = (i == t.length-1) ? 0 : i + 1; // increment i
+		probe = abs(hash(x) + i*hash2(x)) % (1 << d);
+	}
+	return null;
+}
+
+template<class T>
+T LinearHashTable<T>::remove(T x) {
+	int i = 0;
+	int probe = hash(x);
+	while (t[probe] != null) {
+		T y = t[probe];
+		if (y != del && x == y) {
+			t[probe] = del;
+			n--;
+			if (8*n < t.length) resize(); // min 12.5% occupancy
+			return y;
+		}
+		i = (i == t.length-1) ? 0 : i + 1;  // increment i
+		probe = abs(hash(x) + i*hash2(x)) % (1 << d);
+	}
+	return null;
+}
+
+template<class T>
+bool LinearHashTable<T>::addSlow(T x) {
+	if (2*(q+1) > t.length) resize();   // max 50% occupancy
+	int i = 0;
+	int probe = hash(x);
+	while (t[probe] != null) {
+			if (t[probe] != del && x.equals(t[probe])) return false;
+			i = (i == t.length-1) ? 0 : i + 1; // increment i
+			probe = abs(hash(x) + i*hash2(x)) % (1 << d);
+	}
+	t[probe] = x;
+	n++; q++;
+	return true;
+}
