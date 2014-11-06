@@ -1,0 +1,40 @@
+template<class Node>
+int BinaryTree<Node>::height2(Node* u) {
+	Node *prev = nil, *next;
+	int height = 0;
+	int maxHeight = 0;
+	while (u != nil) {
+		if (prev == u->parent) {
+			height++;
+			if (u->left != nil) {
+				next = u->left;
+			}
+			else if (u->right != nil) {
+				next = u->right;
+			}
+			else {
+				next = u->parent;
+				height--;
+			}
+		}
+		else if (prev == u->left) {
+			if (u->right != nil) {
+				next = u->right;
+			}
+			else {
+				next = u->parent;
+				height--;
+			}
+		}
+		else {
+			next = u->parent;
+			height--;
+		}
+		prev = u;
+		u = next;
+		if (height > maxHeight) {
+			maxHeight = height;
+		}
+	}
+	return maxHeight;
+}
