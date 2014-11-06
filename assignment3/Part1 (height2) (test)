@@ -1,0 +1,15 @@
+BinarySearchTree<BSTNode1<double>, double> tree;
+	tree.add(15);
+	tree.add(14);
+	tree.add(13);
+	tree.add(17);
+	tree.add(14.5);
+	tree.add(14.1);
+
+	cout << "Using height(): " << tree.height() << endl;
+	cout << "Using height2(): " << tree.height2() << endl;
+
+	tree.add(14.3);
+
+	cout << "height() after adding a node: " << tree.height() << endl;
+	cout << "height2() after adding a node: " << tree.height2() << endl;
