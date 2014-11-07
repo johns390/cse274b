@@ -48,3 +48,20 @@ void BinarySearchTree<Node, T>::inOrderNumber(Node* u, int &counter) {
 	u->preNumber = counter;
 	inOrderNumber(u->right, counter);
 }
+
+template<class Node, class T>
+Node* BinarySearchTree<Node, T>::getNode(T x) {
+	Node *w = r, *z = nil;
+		while (w != nil) {
+			int comp = compare(x, w->x);
+			if (comp < 0) {
+				z = w;
+				w = w->left;
+			} else if (comp > 0) {
+				w = w->right;
+			} else {
+				return w;
+			}
+		}
+		return z == nil ? nil : z;
+}
