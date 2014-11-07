@@ -1,0 +1,33 @@
+template<class Node, class T>
+DLList<T> BinarySearchTree<Node, T>::getLE(T y) {
+	DLList<T> list;
+	Node *u = r, *prev = nil;
+	while(u != nil) {
+		if (u->left == nil) {
+			if (u->x > y) {
+				return list;
+			}
+			list.add(u->x);
+			u = u->right;
+		}
+		else {
+			prev =  u->left;
+			while (prev ->right != nil && prev->right != u) {
+				prev = prev->right;
+			}
+			if (prev->right == nil) {
+				prev->right = u;
+				u = u->left;
+			}
+			else {
+				prev->right = nil;
+				if (u->x > y) {
+					return list;
+				}
+				list.add(u->x);
+				u = u->right;
+			}
+		}
+	}
+	return list;
+}
