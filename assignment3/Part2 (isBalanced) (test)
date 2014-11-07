@@ -1,0 +1,13 @@
+BinarySearchTree<BSTNode1<double>, double> tree;
+	tree.add(15);
+	tree.add(14);
+	tree.add(13);
+	tree.add(17);
+	tree.add(14.5);
+	tree.add(14.1);
+BinarySearchTree<BSTNode1<double>, double> emptyTree;
+
+	cout << boolalpha << tree.isBalanced() << endl;
+	cout << boolalpha << emptyTree.isBalanced() << endl;
+	
+	//***DOES OPPOSITE OF WHAT IS EXPECTED???***
