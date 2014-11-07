@@ -1,0 +1,50 @@
+template<class Node, class T>
+void BinarySearchTree<Node, T>::preOrderNumber() {
+	int counter = 0;
+	preOrderNumber(r, counter);
+}
+
+template<class Node, class T>
+void BinarySearchTree<Node, T>::preOrderNumber(Node* u, int &counter) {
+	if (u == nil) {
+		return;
+	}
+	counter++;
+	u->preNumber = counter;
+	preOrderNumber(u->left, counter);
+	preOrderNumber(u->right, counter);
+}
+
+template<class Node, class T>
+void BinarySearchTree<Node, T>::postOrderNumber() {
+	int counter = 0;
+	postOrderNumber(r, counter);
+}
+
+template<class Node, class T>
+void BinarySearchTree<Node, T>::postOrderNumber(Node* u, int &counter) {
+	if (u == nil) {
+		return;
+	}
+	postOrderNumber(u->left, counter);
+	postOrderNumber(u->right, counter);
+	counter++;
+	u->preNumber = counter;
+}
+
+template<class Node, class T>
+void BinarySearchTree<Node, T>::inOrderNumber() {
+	int counter = 0;
+	inOrderNumber(r, counter);
+}
+
+template<class Node, class T>
+void BinarySearchTree<Node, T>::inOrderNumber(Node* u, int &counter) {
+	if (u == nil) {
+		return;
+	}
+	inOrderNumber(u->left, counter);
+	counter++;
+	u->preNumber = counter;
+	inOrderNumber(u->right, counter);
+}
