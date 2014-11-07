@@ -1,0 +1,14 @@
+template<class Node>
+bool BinaryTree<Node>::isBalanced() {
+	return isBalanced(r);
+}
+
+template<class Node>
+int BinaryTree<Node>::isBalanced(Node* u) {
+	if (u == nil) return 0;
+	int x = isBalanced(u->left);
+	int y = isBalanced(u->right);
+	if (x >= 0 && y >= 0 && abs(x - y) <= 1)
+		return 1 + x + y;
+	else return -1;
+}
