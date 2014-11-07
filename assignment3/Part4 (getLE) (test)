@@ -1,0 +1,4 @@
+DLList<double> list = tree.getLE(15);
+	for (int i = 0; i < list.size(); i++) {
+		cout << list.get(i) << endl;
+	}
