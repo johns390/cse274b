@@ -1,0 +1,39 @@
+int main() {
+
+	BinarySearchTree<BSTNode1<double>, double> tree;
+	tree.add(15);
+	tree.add(14);
+	tree.add(13);
+	tree.add(17);
+	tree.add(14.5);
+	tree.add(14.1);
+
+	cout << "Using height(): " << tree.height() << endl;
+	cout << "Using height2(): " << tree.height2() << endl;
+
+	tree.add(14.3);
+
+	cout << "height() after adding a node: " << tree.height() << endl;
+	cout << "height2() after adding a node: " << tree.height2() << endl;
+
+	BinarySearchTree<BSTNode1<double>, double> emptyTree;
+
+	cout << boolalpha << tree.isBalanced() << endl;
+	cout << boolalpha << emptyTree.isBalanced() << endl;
+	//	***DOES OPPOSITE OF WHAT IS EXPECTED???***
+
+	//	Returns numbers as expected
+	tree.preOrderNumber();
+	tree.postOrderNumber();
+	tree.inOrderNumber();
+
+	// Returns memory address of Node pointer
+	cout << tree.getNode(13) << endl;
+
+	DLList<double> list = tree.getLE(15);
+	for (int i = 0; i < list.size(); i++) {
+		cout << list.get(i) << endl;
+	}
+
+	return 0;
+}
