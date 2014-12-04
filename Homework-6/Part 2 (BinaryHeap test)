@@ -1,0 +1,21 @@
+#include <iostream>
+#include "BinaryHeap.h"
+using namespace std;
+using namespace ods;
+
+int main() {
+
+	BinaryHeap<int> test;
+	test.add(14);
+	test.add(27);
+	test.add(32);
+	test.add(2);
+	test.add(45);
+	cout << "Size: " << test.size() << endl;
+	cout << "Min: " << test.findMin() << endl;
+	test.remove(0);
+	cout << "Size: " << test.size() << endl;
+	cout << "Min: " << test.findMin() << endl;
+
+	return 0;
+}
