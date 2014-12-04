@@ -1,0 +1,11 @@
+public:
+	T remove(int i);		//my method
+
+template<class T>
+T BinaryHeap<T>::remove(int i) {
+	T x = a[i];
+	a[i] = a[--n];
+	trickleDown(i);
+	if (3*n < a.length) resize();
+	return x;
+}
