@@ -5,7 +5,12 @@ template<class T>
 T BinaryHeap<T>::remove(int i) {
 	T x = a[i];
 	a[i] = a[--n];
-	trickleDown(i);
+	if (a[i] >= a[parent(i)]) {
+		trickleDown(i);
+	}
+	else {
+		bubbleUp(i);
+	}
 	if (3*n < a.length) resize();
 	return x;
 }
